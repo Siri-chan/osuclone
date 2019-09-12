@@ -1,0 +1,10 @@
+
+int start;
+
+
+  start = millis();
+
+  int timer = millis()-start;
+  text(timer, 20, 20);
+  if(timer == 10000){
+    click+
