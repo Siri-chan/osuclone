@@ -156,8 +156,12 @@ void keyReleased()
    exit(); 
   }
   if(key=='p'){
+  if(loli == false){
   OtherSketch otherSketch = new OtherSketch();
   runSketch(new String[]{"OtherSketch"}, otherSketch);
+  } else {
+  println("just fucking play");
+  }
   }
 } 
 class OtherSketch extends PApplet {
