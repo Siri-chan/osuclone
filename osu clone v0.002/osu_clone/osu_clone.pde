@@ -155,7 +155,4 @@ void keyReleased()
   if(key=='q'){
    exit(); 
   }
-  if(key=='p'){
-    keys[2]=true;
-  }
 }
