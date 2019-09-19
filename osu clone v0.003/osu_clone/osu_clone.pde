@@ -200,7 +200,8 @@ void mouseClicked(){
   }
   if(man==true){
   if(lol==true){
-    if(mouseX <= 800-40 && mouseX >= 40 && mouseY >= 40 && mouseY <= 600-40){
+ if(mouseButton == LEFT){
+    if(mouseX <= 800-75 && mouseY <= 600-75){
     stroke(0);
     fill(255);
   output.println(mouseX);
@@ -210,7 +211,13 @@ void mouseClicked(){
   stroke(0);
   text(circle, mouseX-10, mouseY+10);
  circle++;
-      }
+    }
+  }
+    if(mouseButton == RIGHT){
+    output = createWriter(saved+".level");
+    background(200);
+    circle=1;
+  }
     }
   }
 } if(man==false){
