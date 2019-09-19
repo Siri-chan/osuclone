@@ -38,7 +38,8 @@ void mouseClicked(){
    
   if(man==true){
   if(lol==true){
- if(mouseButton == LEFT){
+  if(mouseButton == LEFT){
+
     if(mouseX <= 800-75 && mouseY <= 600-75){
     stroke(0);
     fill(255);
@@ -49,6 +50,10 @@ void mouseClicked(){
   stroke(0);
   text(circle, mouseX-10, mouseY+10);
  circle++;
+ }
+ if(mouseButton == RIGHT){
+ //Deletion code goes here
+ }
     }
   }
     if(mouseButton == RIGHT){
