@@ -128,10 +128,10 @@ void draw() {
 }
 void keyPressed()
 {
-  if (key == 'z') {
+  if (key == 'z' || key == 'Z') {
     keys[0] = true;
   }
-  if (key == 'x') {
+  if (key == 'x' || key == 'X') {
     keys[0] = true;
   }
   if (keyCode == DOWN) {
@@ -140,10 +140,10 @@ void keyPressed()
 }
 void keyReleased()
 {
-  if (key == 'z') {
+  if (key == 'z' || key == 'Z') {
     keys[0] = false;
   }
-  if (key == 'x') {
+  if (key == 'x' || key == 'X') {
     keys[0] = false;
   }
   if (keyCode == DOWN) {
@@ -152,10 +152,10 @@ void keyReleased()
     }
     keys[1]=false;
   }
-  if (key=='q') {
+  if (key=='q' || key == 'Q') {
     exit();
   }
-  if(key=='p'){
+  if(key=='p' || key == 'P'){
   if(loli == false){
   OtherSketch otherSketch = new OtherSketch();
   runSketch(new String[]{"OtherSketch"}, otherSketch);
