@@ -166,7 +166,7 @@ String typing = "";
 
 // Variable to store saved text when return is hit
 String saved = "";
-
+boolean man = true;
 PrintWriter output;
 boolean lol = false;
 int circle = 1;
@@ -220,7 +220,7 @@ void mouseClicked(){
   }
     }
   }
-} if(man==false){
+ if(man==false){
     if(mouseButton == LEFT){
     fill(255,0,0);
     stroke(0);
