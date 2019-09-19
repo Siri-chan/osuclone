@@ -193,9 +193,14 @@ void draw() {
   text("Once you are done, press '1' to exit and save the notes",25,270);
 }
 void mouseClicked(){
+    if(keyPressed && keyCode == SHIFT){
+    man=false;
+  } else if(keyPressed && keyCode == CONTROL){
+    man=true;
+  }
+  if(man==true){
   if(lol==true){
-    if(mouseButton == LEFT){
-    if(mouseX <= 800-75 && mouseY <= 600-75){
+    if(mouseX <= 800-40 && mouseX >= 40 && mouseY >= 40 && mouseY <= 600-40){
     stroke(0);
     fill(255);
   output.println(mouseX);
@@ -205,16 +210,17 @@ void mouseClicked(){
   stroke(0);
   text(circle, mouseX-10, mouseY+10);
  circle++;
+      }
     }
   }
-    if(mouseButton == RIGHT){
-    output = createWriter(saved+".level");
-    background(200);
-    circle=1;
-  }
-    }
-  }
-}
+} if(man==false){
+    if(mouseButton == LEFT){
+    fill(255,0,0);
+    stroke(0);
+    ellipse(mouseX,mouseY,200,75);
+     }
+   }
+ }
 void keyPressed() {
   // If the return key is pressed, save the String and clear it
   if (key == '2' ) {
