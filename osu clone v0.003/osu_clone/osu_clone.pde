@@ -254,9 +254,11 @@ class OtherSketch extends PApplet {
       // A String can be cleared by setting it equal to ""
       typing = "";
     } else if (key == '1') {
+    if (saved != ""){
       output.flush();
       output.close();
       exit();
+      }
     } else {
       // Otherwise, concatenate the String
       // Each character typed by the user is added to the end of the String variable.
