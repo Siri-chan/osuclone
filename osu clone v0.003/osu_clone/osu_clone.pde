@@ -178,6 +178,11 @@ void setup() {
 }
 
 void draw() {  
+ if(keyPressed && keyCode == SHIFT){
+    man=false;
+  } else if(keyPressed && keyCode == CONTROL){
+    man=true;
+  }
   // Set the font and fill for text
   noFill();
   stroke(0);
@@ -193,11 +198,7 @@ void draw() {
   text("Once you are done, press '1' to exit and save the notes",25,270);
 }
 void mouseClicked(){
-    if(keyPressed && keyCode == SHIFT){
-    man=false;
-  } else if(keyPressed && keyCode == CONTROL){
-    man=true;
-  }
+   
   if(man==true){
   if(lol==true){
  if(mouseButton == LEFT){
