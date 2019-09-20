@@ -43,8 +43,7 @@
           if (mouseX <= 800-75 && mouseY <= 600-75) {
             stroke(0);
             fill(255);
-            output.println(mouseX);
-            output.println(mouseY);
+            output.print(mouseX+","+mouseY+",");
             ellipse(mouseX, mouseY, 75, 75);
             fill(0);
             stroke(0);
@@ -63,6 +62,7 @@
       if (mouseButton == LEFT) {
         fill(255, 0, 0);
         stroke(0);
+        output.print(mouseX+","+mouseY+",");
         ellipse(mouseX, mouseY, 75, 75);
       }
     }
