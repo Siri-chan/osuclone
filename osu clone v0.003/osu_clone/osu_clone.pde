@@ -6,13 +6,14 @@ boolean die = false;
 int index = 0;
 PrintWriter output;
 String[] lines;
-int[] circlex = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-int[] circley = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+int[] circlex = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+int[] circley = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 int cs = 75;
 int clicked = 0;
 String[] pieces;
 boolean loli = false;
 PImage bg;
+boolean[] slider;
 void setup() {
   size(800, 600);
   background(128);
@@ -42,6 +43,19 @@ void draw() {
       circley[4] = int(pieces[9]);
       circlex[5] = int(pieces[10]);
       circley[5] = int(pieces[11]);
+      //
+      circlex[6] = int(pieces[12]);
+      circley[6] = int(pieces[13]);
+      circlex[7] = int(pieces[14]);      
+      circley[7] = int(pieces[15]);
+      circlex[8] = int(pieces[16]);
+      circley[8] = int(pieces[17]);
+      circlex[9] = int(pieces[18]);
+      circley[9] = int(pieces[19]);
+      circlex[10] = int(pieces[20]);      
+      circley[10] = int(pieces[21]);
+      circlex[11] = int(pieces[22]);
+      circley[11] = int(pieces[23]);
       die=true;
     }
   } 
@@ -155,14 +169,13 @@ void keyReleased()
   if (key=='q' || key == 'Q') {
     exit();
   }
-  if(key=='p' || key == 'P'){
-  if(loli == false){
-  OtherSketch otherSketch = new OtherSketch();
-  runSketch(new String[]{"OtherSketch"}, otherSketch);
-  } else {
-  println("just fucking play");
-  }
-
+  if (key=='p' || key == 'P') {
+    if (loli == false) {
+      OtherSketch otherSketch = new OtherSketch();
+      runSketch(new String[]{"OtherSketch"}, otherSketch);
+    } else {
+      println("just fucking play");
+    }
   }
 } 
 class OtherSketch extends PApplet {
@@ -230,16 +243,6 @@ class OtherSketch extends PApplet {
       if (mouseButton == LEFT) {
         fill(255, 0, 0);
         stroke(0);
-        ellipse(mouseX, mouseY, 200, 75);
-      }
-    }
-  }
-
-  void mouseDragged() {
-    if (man==false) {
-      if (mouseButton == LEFT) {
-        fill(255, 0, 0);
-        stroke(0);
         ellipse(mouseX, mouseY, 75, 75);
       }
     }
@@ -254,10 +257,10 @@ class OtherSketch extends PApplet {
       // A String can be cleared by setting it equal to ""
       typing = "";
     } else if (key == '1') {
-    if (saved != ""){
-      output.flush();
-      output.close();
-      exit();
+      if (saved != "") {
+        output.flush();
+        output.close();
+        exit();
       }
     } else {
       // Otherwise, concatenate the String
@@ -266,4 +269,3 @@ class OtherSketch extends PApplet {
     }
   }
 }
-
