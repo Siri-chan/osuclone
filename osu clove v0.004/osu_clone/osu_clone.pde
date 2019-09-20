@@ -40,6 +40,7 @@ void draw() {
     text(mapname, 20, 300);
     text(mapplaying, 20, 400);
     if (mousePressed && mouseButton == LEFT && mouseX >0 && mouseX <400 && mouseY >0 && mouseY <200) {
+    start = millis();
       loli = true;
     }
   }
@@ -83,10 +84,10 @@ void draw() {
       ellipse(circlex[0], circley[0], cs, cs);
       fill(0);
       text(clicked+1, circlex[0]-10, circley[0]+10);
-      int timer = millis()-start;
+      int timer = millis()-start - 3000;
       textSize(100);
       text(timer, 20, 100);
-      if (timer >= 3000) {
+      if (timer >= 0) {
         if (mouseX > circlex[0] - cs && mouseX < circlex[0] + cs && mouseY > circley[0] - cs && mouseY < circley[0] + cs) {
           if (keys[0]==true) {
             clicked++;
