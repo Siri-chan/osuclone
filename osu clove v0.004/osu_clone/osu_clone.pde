@@ -252,4 +252,9 @@ void keyReleased()
   if (key=='q' || key == 'Q') {
     exit();
   }
+    if (key == 'm' || key == 'M'){
+    loli = false;
+    mapname = "";
+    die = false;
+  }
 } 
