@@ -14,11 +14,11 @@ String[] pieces;
 boolean loli = false;
 PImage bg;
 boolean[] slider;
+String mapname = "";
+String mapplaying = "default.level";
 void setup() {
   size(800, 600);
   background(128);
-  lines = loadStrings("default.level");
-
   /*
   !!IMPORTANT DEV NOTE!!
    This line being uncommented resets things
@@ -28,48 +28,54 @@ void setup() {
   bg = loadImage("bg.jpg");
 }
 void draw() {
-  if (index < lines.length) {
-    pieces = split(lines[index], ',');
-    if (die == false) {
-      circlex[0] = int(pieces[0]);
-      circley[0] = int(pieces[1]);
-      circlex[1] = int(pieces[2]);      
-      circley[1] = int(pieces[3]);
-      circlex[2] = int(pieces[4]);
-      circley[2] = int(pieces[5]);
-      circlex[3] = int(pieces[6]);
-      circley[3] = int(pieces[7]);
-      circlex[4] = int(pieces[8]);      
-      circley[4] = int(pieces[9]);
-      circlex[5] = int(pieces[10]);
-      circley[5] = int(pieces[11]);
-      //
-      circlex[6] = int(pieces[12]);
-      circley[6] = int(pieces[13]);
-      circlex[7] = int(pieces[14]);      
-      circley[7] = int(pieces[15]);
-      circlex[8] = int(pieces[16]);
-      circley[8] = int(pieces[17]);
-      circlex[9] = int(pieces[18]);
-      circley[9] = int(pieces[19]);
-      circlex[10] = int(pieces[20]);      
-      circley[10] = int(pieces[21]);
-      circlex[11] = int(pieces[22]);
-      circley[11] = int(pieces[23]);
-      die=true;
-    }
-  } 
+
   if (loli == false) {
+    background(128);
     fill(255, 0, 0);
     rect(0, 0, 400, 200);
     fill(0, 255, 0);
     textSize(100);
     text("PLAY", 50, 150);
+    textSize(50);
+    text(mapname, 20, 300);
+    text(mapplaying, 20, 400);
     if (mousePressed && mouseButton == LEFT && mouseX >0 && mouseX <400 && mouseY >0 && mouseY <200) {
       loli = true;
     }
   }
   if (loli == true) {
+    lines = loadStrings(mapplaying);
+    if (index < lines.length) {
+      pieces = split(lines[index], ',');
+      if (die == false) {
+        circlex[0] = int(pieces[0]);
+        circley[0] = int(pieces[1]);
+        circlex[1] = int(pieces[2]);      
+        circley[1] = int(pieces[3]);
+        circlex[2] = int(pieces[4]);
+        circley[2] = int(pieces[5]);
+        circlex[3] = int(pieces[6]);
+        circley[3] = int(pieces[7]);
+        circlex[4] = int(pieces[8]);      
+        circley[4] = int(pieces[9]);
+        circlex[5] = int(pieces[10]);
+        circley[5] = int(pieces[11]);
+        //
+        circlex[6] = int(pieces[12]);
+        circley[6] = int(pieces[13]);
+        circlex[7] = int(pieces[14]);      
+        circley[7] = int(pieces[15]);
+        circlex[8] = int(pieces[16]);
+        circley[8] = int(pieces[17]);
+        circlex[9] = int(pieces[18]);
+        circley[9] = int(pieces[19]);
+        circlex[10] = int(pieces[20]);      
+        circley[10] = int(pieces[21]);
+        circlex[11] = int(pieces[22]);
+        circley[11] = int(pieces[23]);
+        die=true;
+      }
+    }
     fill(255);
     textSize(25);
     background(bg);
@@ -202,16 +208,27 @@ void draw() {
     }
   }
 }
-void keyPressed()
-{
-  if (key == 'z' || key == 'Z') {
-    keys[0] = true;
-  }
-  if (key == 'x' || key == 'X') {
-    keys[0] = true;
-  }
-  if (keyCode == DOWN) {
-    keys[1] = true;
+void keyPressed() {
+  if (loli == true)
+  {
+    if (key == 'z' || key == 'Z') {
+      keys[0] = true;
+    }
+    if (key == 'x' || key == 'X') {
+      keys[0] = true;
+    }
+    if (keyCode == DOWN) {
+      keys[1] = true;
+    }
+  } else {
+    if (key == '5') {
+      mapplaying = mapname+".level";
+    } else {
+      if (key == '0') {
+        mapname = "";
+      } else
+        mapname = mapname+key;
+    }
   }
 }
 void keyReleased()
