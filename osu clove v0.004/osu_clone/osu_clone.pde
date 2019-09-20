@@ -252,9 +252,11 @@ void keyReleased()
   if (key=='q' || key == 'Q') {
     exit();
   }
-    if (key == 'm' || key == 'M'){
+  if (key == 'm' || key == 'M'){
     loli = false;
     mapname = "";
     die = false;
+  cs = 75; //circle size
+  clicked = 0;
   }
 } 
