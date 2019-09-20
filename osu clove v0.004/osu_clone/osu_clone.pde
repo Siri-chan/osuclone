@@ -84,15 +84,18 @@ void draw() {
       ellipse(circlex[0], circley[0], cs, cs);
       fill(0);
       text(clicked+1, circlex[0]-10, circley[0]+10);
-      int timer = millis()-start - 3000;
+      int timer = millis()-start - 4000;
+      int timer2 = timer / 1000;
       textSize(100);
-      text(timer, 20, 100);
-      if (timer >= 0) {
+      
+      if (timer2 >= 0) {
         if (mouseX > circlex[0] - cs && mouseX < circlex[0] + cs && mouseY > circley[0] - cs && mouseY < circley[0] + cs) {
           if (keys[0]==true) {
             clicked++;
           }
         }
+      } else {
+        text(timer2, 20, 100);
       }
     }
     if (clicked == 1) {
