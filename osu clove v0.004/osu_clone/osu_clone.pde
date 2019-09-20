@@ -1,14 +1,14 @@
 /*import processing.sound.*;
  SoundFile song;*/
-int start;
-boolean[] keys = {false, false};
-boolean die = false;
-int index = 0;
-PrintWriter output;
-String[] lines;
-int[] circlex = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-int[] circley = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-int cs = 75;
+int start; //Not Sure What this is for
+boolean[] keys = {false, false}; //User Input Bool
+boolean die = false; //Loading thingy
+int index = 0; //loading thing
+PrintWriter output; // used in editor ~~ obsolete
+String[] lines; //loading thingy
+int[] circlex = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; // circle positions
+int[] circley = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; // more circle positions
+int cs = 75; //circle size
 int clicked = 0;
 String[] pieces;
 boolean loli = false;
@@ -231,105 +231,4 @@ void keyReleased()
   if (key=='q' || key == 'Q') {
     exit();
   }
-  if (key=='p' || key == 'P') {
-    if (loli == false) {
-      OtherSketch otherSketch = new OtherSketch();
-      runSketch(new String[]{"OtherSketch"}, otherSketch);
-    } else {
-      println("just fucking play");
-    }
-  }
 } 
-class OtherSketch extends PApplet {
-  // Variable to store text currently being typed
-  String typing = "";
-
-  // Variable to store saved text when return is hit
-  String saved = "";
-  boolean man = true;
-  PrintWriter output;
-  boolean lol = false;
-  int circle = 1;
-  void setup() {
-    background(200);
-    surface.setResizable(true);
-    noStroke();
-    fill(255);
-  }
-
-  void draw() {  
-    if (keyPressed && keyCode == SHIFT) {
-      man=false;
-    } else if (keyPressed && keyCode == CONTROL) {
-      man=true;
-    }
-    // Set the font and fill for text
-    noFill();
-    stroke(0);
-    strokeWeight(5);
-    rect(0, 0, 800, 600);
-    noStroke();
-    fill(0);
-    textSize(25);
-    // Display everything
-    text("Click in this window and type. \nHit '2' to save. ", 25, 40);
-    text("Input: " + typing, 25, 190);
-    text("Saved text: " + saved, 25, 230);
-    text("Once you are done, press '1' to exit and save the notes", 25, 270);
-  }
-  void mouseClicked() {
-
-    if (man==true) {
-      if (lol==true) {
-        if (mouseButton == LEFT) {
-          if (mouseX <= 800-75 && mouseY <= 600-75) {
-            stroke(0);
-            fill(255);
-            output.println(mouseX);
-            output.println(mouseY);
-            ellipse(mouseX, mouseY, 75, 75);
-            fill(0);
-            stroke(0);
-            text(circle, mouseX-10, mouseY+10);
-            circle++;
-          }
-        }
-        if (mouseButton == RIGHT) {
-          output = createWriter(saved+".level");
-          background(200);
-          circle=1;
-        }
-      }
-    }
-    if (man==false) {
-      if (mouseButton == LEFT) {
-        fill(255, 0, 0);
-        stroke(0);
-        ellipse(mouseX, mouseY, 75, 75);
-      }
-    }
-  }
-
-  void keyPressed() {
-    // If the return key is pressed, save the String and clear it
-    if (key == '2' ) {
-      saved = typing;
-      output = createWriter(saved+".level");
-      lol = true;
-      // A String can be cleared by setting it equal to ""
-      typing = "";
-    } else if (key == '1') {
-      if (saved != "") {
-        if (circle >= 12) {
-          output.flush();
-          output.close();
-          exit();
-        }
-      }
-    } else {
-      // Otherwise, concatenate the String
-      // Each character typed by the user is added to the end of the String variable.
-      typing = typing + key;
-    }
-  }
-}
