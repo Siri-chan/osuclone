@@ -19,12 +19,12 @@ String mapplaying = "default.level";
 void setup() {
   size(800, 600);
   background(128);
-  /*
   !!IMPORTANT DEV NOTE!!
-   This line being uncommented resets things
+   This line being uncommented resets the default level
    */
-  //output = createWriter("default.level");
-  start = millis();
+  /*output = createWriter("default.level");
+   output.print("300,200,444,222,200,300,600,400,599,100,291,429,200,200,200,488,488,292,725,13l,020,202,743,544,744,494,328,382,292,484");
+   */ start = millis();
   bg = loadImage("bg.jpg");
 }
 void draw() {
