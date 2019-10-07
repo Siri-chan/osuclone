@@ -1,5 +1,5 @@
 osu!clone
-
+Version 0.005: The Cursor Update
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Controls:
@@ -12,7 +12,7 @@ M - Return to Menu
 
 HOW TO SELECT A MAP
 type map file name (case-sensitive)
-if mistake made, press 0
+if mistake made, press Backspace, or 0 to clear.
 press 5 to confirm
 current selected map displayed at bottom of menu
 
