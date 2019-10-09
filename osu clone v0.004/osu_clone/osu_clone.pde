@@ -53,8 +53,9 @@ void draw() {
   }
   if (loli == true) {
     textAlign(LEFT, BOTTOM);
+    try {
     lines = loadStrings(mapplaying);
-    if (index < lines.length) {
+        if (index < lines.length) {
       pieces = split(lines[index], ',');
       if (die == false) {
         circlex[0] = int(pieces[0]);
@@ -69,7 +70,6 @@ void draw() {
         circley[4] = int(pieces[9]);
         circlex[5] = int(pieces[10]);
         circley[5] = int(pieces[11]);
-        //
         circlex[6] = int(pieces[12]);
         circley[6] = int(pieces[13]);
         circlex[7] = int(pieces[14]);      
@@ -84,7 +84,16 @@ void draw() {
         circley[11] = int(pieces[23]);
         die=true;
       }
+        }
+    } catch (Exception e){
+    println("Failed to load level: Check Game Directory and if filename entered correctly");
+        loli = false;
+    mapname = "";
+    die = false;
+    cs = 75; //circle size
+    clicked = 0;
     }
+
     fill(255);
     textSize(25);
     background(bg);
