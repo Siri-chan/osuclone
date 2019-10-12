@@ -16,37 +16,46 @@ PImage bg;
 boolean[] slider;
 String mapname = "";
 String mapplaying = "default.level";
+PImage menubg;
 void setup() {
   size(800, 600);
   background(128);
   /*
   !!IMPORTANT DEV NOTE!!
-   This line being uncommented resets things
+   This line being uncommented resets the default level
    */
-  //output = createWriter("default.level");
-  start = millis();
+  /*output = createWriter("default.level");
+   output.print("300,200,444,222,200,300,600,400,599,100,291,429,200,200,200,488,488,292,725,13l,020,202,743,544,744,494,328,382,292,484");
+   */  start = millis();
   bg = loadImage("bg.jpg");
+    menubg = loadImage("menu.jpg");
 }
 void draw() {
 
-  if (loli == false) {
-    background(128);
-    fill(255, 0, 0);
-    rect(0, 0, 400, 200);
-    fill(0, 255, 0);
-    textSize(100);
-    text("PLAY", 50, 150);
-    textSize(50);
-    text(mapname, 20, 300);
-    text(mapplaying, 20, 400);
-    if (mousePressed && mouseButton == LEFT && mouseX >0 && mouseX <400 && mouseY >0 && mouseY <200) {
-    start = millis();
+  if(loli == false){
+  background(menubg);
+  textAlign(CENTER, CENTER);
+  fill(255);
+  textSize(50);
+  text(mapname, 400, 500);
+  text(mapplaying, 400, 550);
+  fill(255, 192, 203);
+  textSize(100);
+  if (mouseX > 250 && mouseX < 550 && mouseY > 82.5 && mouseY < 467.5) {
+    ellipse(400, 275, 300, 385);
+    fill(255);
+    text("PLAY", 400, 275);
+    if (mousePressed && mouseButton == LEFT) {
+      start = millis();
       loli = true;
     }
   }
+  }
   if (loli == true) {
+    textAlign(LEFT, BOTTOM);
+    try {
     lines = loadStrings(mapplaying);
-    if (index < lines.length) {
+        if (index < lines.length) {
       pieces = split(lines[index], ',');
       if (die == false) {
         circlex[0] = int(pieces[0]);
@@ -61,7 +70,6 @@ void draw() {
         circley[4] = int(pieces[9]);
         circlex[5] = int(pieces[10]);
         circley[5] = int(pieces[11]);
-        //
         circlex[6] = int(pieces[12]);
         circley[6] = int(pieces[13]);
         circlex[7] = int(pieces[14]);      
@@ -76,7 +84,16 @@ void draw() {
         circley[11] = int(pieces[23]);
         die=true;
       }
+        }
+    } catch (Exception e){
+    println("Failed to load level: Check Game Directory and if filename entered correctly");
+        loli = false;
+    mapname = "";
+    die = false;
+    cs = 75; //circle size
+    clicked = 0;
     }
+
     fill(255);
     textSize(25);
     background(bg);
@@ -87,7 +104,7 @@ void draw() {
       int timer = millis()-start - 4000;
       int timer2 = timer / 1000;
       textSize(100);
-      
+
       if (timer2 >= 0) {
         if (mouseX > circlex[0] - cs && mouseX < circlex[0] + cs && mouseY > circley[0] - cs && mouseY < circley[0] + cs) {
           if (keys[0]==true) {
@@ -230,8 +247,15 @@ void keyPressed() {
     } else {
       if (key == '0') {
         mapname = "";
-      } else
+      } else {
+      if( key == BACKSPACE) {
+        if (mapname.length() > 0) {
+        mapname = mapname.substring(0, max(0, mapname.length() - 1));
+      }
+      }else{
         mapname = mapname+key;
+      }
+      }
     }
   }
 }
@@ -252,11 +276,11 @@ void keyReleased()
   if (key=='q' || key == 'Q') {
     exit();
   }
-  if (key == 'm' || key == 'M'){
+  if (key == 'm' || key == 'M') {
     loli = false;
     mapname = "";
     die = false;
-  cs = 75; //circle size
-  clicked = 0;
+    cs = 75; //circle size
+    clicked = 0;
   }
 } 
