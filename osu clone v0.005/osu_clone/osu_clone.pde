@@ -9,8 +9,8 @@ boolean die = false; //Loading thingy
 int index = 0; //loading thing
 PrintWriter output; // used in editor ~~ obsolete
 String[] lines; //loading thingy
-int[] circlex = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; // circle positions
-int[] circley = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; // more circle positions
+int[] circlex = new int[50]; // circle positions
+int[] circley = new int[50]; // more circle positions
 int cs = 75; //circle size
 int clicked = 0;
 String[] pieces;
