@@ -23,6 +23,7 @@ PImage menubg;
 void setup() {
   size(800, 600);
   background(128);
+  surface.setTitle("osu!clone: " + splashtext[splash]);
   /*
   !!IMPORTANT DEV NOTE!!
    This line being uncommented resets the default level
@@ -30,80 +31,117 @@ void setup() {
   /*output = createWriter("default.level");
    output.print("300,200,444,222,200,300,600,400,599,100,291,429,200,200,200,488,488,292,725,13l,020,202,743,544,744,494,328,382,292,484");
    */  start = millis();
-  bg = loadImage("bg.jpg");
-    menubg = loadImage("menu.jpg");
-      surface.setTitle("osu!clone: " + splashtext[splash]);
+  menubg = loadImage("menu.jpg");
 }
 void draw() {
 
-  if(loli == false){
-  background(menubg);
-  textAlign(CENTER, CENTER);
-  fill(255);
-  textSize(50);
-  text(mapname, 400, 500);
-  text(mapplaying, 400, 550);
-  fill(255, 192, 203);
-  textSize(100);
-  if (mouseX > 250 && mouseX < 550 && mouseY > 82.5 && mouseY < 467.5) {
-    ellipse(400, 275, 300, 385);
+  if (loli == false) {
+    background(menubg);
+    textAlign(CENTER, CENTER);
     fill(255);
-    text("PLAY", 400, 275);
-    if (mousePressed && mouseButton == LEFT) {
-      start = millis();
-      loli = true;
+    textSize(50);
+    text(mapname, 400, 500);
+    text(mapplaying, 400, 550);
+    fill(255, 192, 203);
+    textSize(100);
+    if (mouseX > 250 && mouseX < 550 && mouseY > 82.5 && mouseY < 467.5) {
+      ellipse(400, 275, 300, 385);
+      fill(255);
+      text("PLAY", 400, 275);
+      if (mousePressed && mouseButton == LEFT) {
+        start = millis();
+        loli = true;
+      }
     }
-  }
   }
   if (loli == true) {
     textAlign(LEFT, BOTTOM);
     try {
-    lines = loadStrings(mapplaying);
-        if (index < lines.length) {
-      pieces = split(lines[index], ',');
-      if (die == false) {
-        circlex[0] = int(pieces[0]);
-        circley[0] = int(pieces[1]);
-        circlex[1] = int(pieces[2]);      
-        circley[1] = int(pieces[3]);
-        circlex[2] = int(pieces[4]);
-        circley[2] = int(pieces[5]);
-        circlex[3] = int(pieces[6]);
-        circley[3] = int(pieces[7]);
-        circlex[4] = int(pieces[8]);      
-        circley[4] = int(pieces[9]);
-        circlex[5] = int(pieces[10]);
-        circley[5] = int(pieces[11]);
-        circlex[6] = int(pieces[12]);
-        circley[6] = int(pieces[13]);
-        circlex[7] = int(pieces[14]);      
-        circley[7] = int(pieces[15]);
-        circlex[8] = int(pieces[16]);
-        circley[8] = int(pieces[17]);
-        circlex[9] = int(pieces[18]);
-        circley[9] = int(pieces[19]);
-        circlex[10] = int(pieces[20]);      
-        circley[10] = int(pieces[21]);
-        circlex[11] = int(pieces[22]);
-        circley[11] = int(pieces[23]);
-        die=true;
-      }
+      lines = loadStrings(mapplaying);
+      if (index < lines.length) {
+        pieces = split(lines[index], ',');
+        if (die == false) {
+          if (pieces[0] == "cs") {
+            cs = int(pieces[1]);
+            circlex[0] = int(pieces[2]);
+            circley[0] = int(pieces[3]);
+            circlex[1] = int(pieces[4]);      
+            circley[1] = int(pieces[5]);
+            circlex[2] = int(pieces[6]);
+            circley[2] = int(pieces[7]);
+            circlex[3] = int(pieces[8]);
+            circley[3] = int(pieces[9]);
+            circlex[4] = int(pieces[10]);      
+            circley[4] = int(pieces[11]);
+            circlex[5] = int(pieces[12]);
+            circley[5] = int(pieces[13]);
+            //
+            circlex[6] = int(pieces[14]);
+            circley[6] = int(pieces[15]);
+            circlex[7] = int(pieces[16]);      
+            circley[7] = int(pieces[17]);
+            circlex[8] = int(pieces[18]);
+            circley[8] = int(pieces[19]);
+            circlex[9] = int(pieces[20]);
+            circley[9] = int(pieces[21]);
+            circlex[10] = int(pieces[22]);      
+            circley[10] = int(pieces[23]);
+            circlex[11] = int(pieces[24]);
+            circley[11] = int(pieces[25]);
+            die=true;
+          } else {
+            cs = 75;
+            circlex[0] = int(pieces[0]);
+            circley[0] = int(pieces[1]);
+            circlex[1] = int(pieces[2]);      
+            circley[1] = int(pieces[3]);
+            circlex[2] = int(pieces[4]);
+            circley[2] = int(pieces[5]);
+            circlex[3] = int(pieces[6]);
+            circley[3] = int(pieces[7]);
+            circlex[4] = int(pieces[8]);      
+            circley[4] = int(pieces[9]);
+            circlex[5] = int(pieces[10]);
+            circley[5] = int(pieces[11]);
+            //
+            circlex[6] = int(pieces[12]);
+            circley[6] = int(pieces[13]);
+            circlex[7] = int(pieces[14]);      
+            circley[7] = int(pieces[15]);
+            circlex[8] = int(pieces[16]);
+            circley[8] = int(pieces[17]);
+            circlex[9] = int(pieces[18]);
+            circley[9] = int(pieces[19]);
+            circlex[10] = int(pieces[20]);      
+            circley[10] = int(pieces[21]);
+            circlex[11] = int(pieces[22]);
+            circley[11] = int(pieces[23]);
+            die=true;
+          }
         }
-    } catch (Exception e){
-    println("Failed to load level: Check Game Directory and if filename entered correctly");
-        loli = false;
-    mapname = "";
-    die = false;
-    cs = 75; //circle size
-    clicked = 0;
+      }
+    } 
+    catch (Exception e) {
+      println("Failed to load level: Check Game Directory and if filename entered correctly");
+      loli = false;
+      mapname = "";
+      die = false;
+      cs = 75; //circle size
+      clicked = 0;
+    }
+    try {
+      bg = loadImage(mapplaying+".jpg");
+    } 
+    catch(Exception e) {
+      bg = loadImage("bg.jpg");
     }
 
     fill(255);
     textSize(25);
-    try{
-    bg = loadImage(mapname+".jpg");
-    background(bg);
-    } catch(Exception e){
+    try {
+      background(bg);
+    } 
+    catch(Exception e) {
       bg = loadImage("bg.jpg");
       background(bg);
     }
@@ -258,13 +296,13 @@ void keyPressed() {
       if (key == '0') {
         mapname = "";
       } else {
-      if( key == BACKSPACE) {
-        if (mapname.length() > 0) {
-        mapname = mapname.substring(0, max(0, mapname.length() - 1));
-      }
-      }else{
-        mapname = mapname+key;
-      }
+        if ( key == BACKSPACE) {
+          if (mapname.length() > 0) {
+            mapname = mapname.substring(0, max(0, mapname.length() - 1));
+          }
+        } else {
+          mapname = mapname+key;
+        }
       }
     }
   }
