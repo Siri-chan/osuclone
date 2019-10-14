@@ -100,7 +100,13 @@ void draw() {
 
     fill(255);
     textSize(25);
+    try{
+    bg = loadImage(mapname+".jpg");
     background(bg);
+    } catch(Exception e){
+      bg = loadImage("bg.jpg");
+      background(bg);
+    }
     if (clicked == 0) {
       ellipse(circlex[0], circley[0], cs, cs);
       fill(0);
