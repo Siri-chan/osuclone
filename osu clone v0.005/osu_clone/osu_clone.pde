@@ -1,7 +1,8 @@
 /*import processing.sound.*;
  SoundFile song;*/
-float rsplash = random(2);
-int splash = int(rsplash);
+int circle = 0;
+int piece = 0;
+int splash = int(random(2));
 String[] splashtext = {"better than ppy!", "Electric Boogaloo"};
 int start; //Not Sure What this is for
 boolean[] keys = {false, false}; //User Input Bool
@@ -9,8 +10,8 @@ boolean die = false; //Loading thingy
 int index = 0; //loading thing
 PrintWriter output; // used in editor ~~ obsolete
 String[] lines; //loading thingy
-int[] circlex = new int[50]; // circle positions
-int[] circley = new int[50]; // more circle positions
+int[] circlex = new int[2147483647]; // circle positions
+int[] circley = new int[2147483647]; // more circle positions
 int cs = 75; //circle size
 int clicked = 0;
 String[] pieces;
@@ -61,66 +62,20 @@ void draw() {
       if (index < lines.length) {
         pieces = split(lines[index], ',');
         if (die == false) {
-          if (pieces[0] == "cs") {
-            cs = int(pieces[1]);
-            circlex[0] = int(pieces[2]);
-            circley[0] = int(pieces[3]);
-            circlex[1] = int(pieces[4]);      
-            circley[1] = int(pieces[5]);
-            circlex[2] = int(pieces[6]);
-            circley[2] = int(pieces[7]);
-            circlex[3] = int(pieces[8]);
-            circley[3] = int(pieces[9]);
-            circlex[4] = int(pieces[10]);      
-            circley[4] = int(pieces[11]);
-            circlex[5] = int(pieces[12]);
-            circley[5] = int(pieces[13]);
-            //
-            circlex[6] = int(pieces[14]);
-            circley[6] = int(pieces[15]);
-            circlex[7] = int(pieces[16]);      
-            circley[7] = int(pieces[17]);
-            circlex[8] = int(pieces[18]);
-            circley[8] = int(pieces[19]);
-            circlex[9] = int(pieces[20]);
-            circley[9] = int(pieces[21]);
-            circlex[10] = int(pieces[22]);      
-            circley[10] = int(pieces[23]);
-            circlex[11] = int(pieces[24]);
-            circley[11] = int(pieces[25]);
-            die=true;
-          } else {
-            cs = 75;
-            circlex[0] = int(pieces[0]);
-            circley[0] = int(pieces[1]);
-            circlex[1] = int(pieces[2]);      
-            circley[1] = int(pieces[3]);
-            circlex[2] = int(pieces[4]);
-            circley[2] = int(pieces[5]);
-            circlex[3] = int(pieces[6]);
-            circley[3] = int(pieces[7]);
-            circlex[4] = int(pieces[8]);      
-            circley[4] = int(pieces[9]);
-            circlex[5] = int(pieces[10]);
-            circley[5] = int(pieces[11]);
-            //
-            circlex[6] = int(pieces[12]);
-            circley[6] = int(pieces[13]);
-            circlex[7] = int(pieces[14]);      
-            circley[7] = int(pieces[15]);
-            circlex[8] = int(pieces[16]);
-            circley[8] = int(pieces[17]);
-            circlex[9] = int(pieces[18]);
-            circley[9] = int(pieces[19]);
-            circlex[10] = int(pieces[20]);      
-            circley[10] = int(pieces[21]);
-            circlex[11] = int(pieces[22]);
-            circley[11] = int(pieces[23]);
+          cs = 75;
+          try {
+            circlex[circle] = int(pieces[piece]);
+            piece++;
+            circley[circle] = int(pieces[piece]);
+            piece++;
+            circle++;
+          } 
+          catch(Exception e) {
             die=true;
           }
         }
       }
-    } 
+    }
     catch (Exception e) {
       println("Failed to load level: Check Game Directory and if filename entered correctly");
       loli = false;
@@ -163,116 +118,26 @@ void draw() {
         text(timer2, 20, 100);
       }
     }
-    if (clicked == 1) {
-      ellipse(circlex[1], circley[1], cs, cs);
-      fill(0);
-      text(clicked+1, circlex[1]-10, circley[1]+10);
-      if (mouseX > circlex[1] - cs && mouseX < circlex[1] + cs && mouseY > circley[1] - cs && mouseY < circley[1] + cs) {
-        if (keys[0]==true) {
-          clicked++;
+    if (clicked > 0) {
+      try {
+        fill(255);
+        ellipse(circlex[clicked], circley[clicked], cs, cs);
+        fill(0);
+        text(clicked+1, circlex[clicked]-10, circley[clicked]+10);
+        if (mouseX > circlex[clicked] - cs && mouseX < circlex[clicked] + cs && mouseY > circley[clicked] - cs && mouseY < circley[clicked] + cs) {
+          if (keys[0]==true) {
+            clicked++;
+          }
         }
       }
-    }
-    if (clicked == 2) {
-      ellipse(circlex[2], circley[2], cs, cs);
-      fill(0);
-      text(clicked+1, circlex[2]-10, circley[2]+10);
-      if (mouseX > circlex[2] - cs && mouseX < circlex[2] + cs && mouseY > circley[2] - cs && mouseY < circley[2] + cs) {
-        if (keys[0]==true) {
-          clicked++;
-        }
-      }
-    }
-    if (clicked == 3) {
-      ellipse(circlex[3], circley[3], cs, cs);
-      fill(0);
-      text(clicked+1, circlex[3]-10, circley[3]+10);
-      if (mouseX > circlex[3] - cs && mouseX < circlex[3] + cs && mouseY > circley[3] - cs && mouseY < circley[3] + cs) {
-        if (keys[0]==true) {
-          clicked++;
-        }
-      }
-    }
-    if (clicked == 4) {
-      ellipse(circlex[4], circley[4], cs, cs);
-      fill(0);
-      text(clicked+1, circlex[4]-10, circley[4]+10);
-      if (mouseX > circlex[4] - cs && mouseX < circlex[4] + cs && mouseY > circley[4] - cs && mouseY < circley[4] + cs) {
-        if (keys[0]==true) {
-          clicked++;
-        }
-      }
-    }
-    if (clicked == 5) {
-      ellipse(circlex[5], circley[5], cs, cs);
-      fill(0);
-      text(clicked+1, circlex[5]-10, circley[5]+10);
-      if (mouseX > circlex[5] - cs && mouseX < circlex[5] + cs && mouseY > circley[5] - cs && mouseY < circley[5] + cs) {
-        if (keys[0]==true) {
-          clicked++;
-        }
-      }
-    }
-    //
-    if (clicked == 6) {
-      ellipse(circlex[6], circley[6], cs, cs);
-      fill(0);
-      text(clicked+1, circlex[6]-10, circley[6]+10);
-      textSize(100);
-      if (mouseX > circlex[6] - cs && mouseX < circlex[6] + cs && mouseY > circley[6] - cs && mouseY < circley[6] + cs) {
-        if (keys[0]==true) {
-          clicked++;
-        }
-      }
-    }
-  }
-  if (clicked == 7) {
-    ellipse(circlex[7], circley[7], cs, cs);
-    fill(0);
-    text(clicked+1, circlex[7]-10, circley[7]+10);
-    if (mouseX > circlex[7] - cs && mouseX < circlex[7] + cs && mouseY > circley[7] - cs && mouseY < circley[7] + cs) {
-      if (keys[0]==true) {
-        clicked++;
-      }
-    }
-  }
-  if (clicked == 8) {
-    ellipse(circlex[8], circley[8], cs, cs);
-    fill(0);
-    text(clicked+1, circlex[8]-10, circley[8]+10);
-    if (mouseX > circlex[8] - cs && mouseX < circlex[8] + cs && mouseY > circley[8] - cs && mouseY < circley[8] + cs) {
-      if (keys[0]==true) {
-        clicked++;
-      }
-    }
-  }
-  if (clicked == 9) {
-    ellipse(circlex[9], circley[9], cs, cs);
-    fill(0);
-    text(clicked+1, circlex[9]-10, circley[9]+10);
-    if (mouseX > circlex[9] - cs && mouseX < circlex[9] + cs && mouseY > circley[9] - cs && mouseY < circley[9] + cs) {
-      if (keys[0]==true) {
-        clicked++;
-      }
-    }
-  }
-  if (clicked == 10) {
-    ellipse(circlex[10], circley[10], cs, cs);
-    fill(0);
-    text(clicked+1, circlex[10]-10, circley[10]+10);
-    if (mouseX > circlex[10] - cs && mouseX < circlex[10] + cs && mouseY > circley[10] - cs && mouseY < circley[10] + cs) {
-      if (keys[0]==true) {
-        clicked++;
-      }
-    }
-  }
-  if (clicked == 11) {
-    ellipse(circlex[11], circley[11], cs, cs);
-    fill(0);
-    text(clicked+1, circlex[11]-10, circley[11]+10);
-    if (mouseX > circlex[11] - cs && mouseX < circlex[11] + cs && mouseY > circley[11] - cs && mouseY < circley[11] + cs) {
-      if (keys[0]==true) {
-        clicked++;
+      catch (Exception e) {
+        loli = false;
+        mapname = "";
+        die = false;
+        cs = 75; //circle size
+        clicked = 0;
+        circle = 0;
+        piece = 0;
       }
     }
   }
@@ -330,5 +195,7 @@ void keyReleased()
     die = false;
     cs = 75; //circle size
     clicked = 0;
+    circle = 0;
+    piece = 0;
   }
 } 
