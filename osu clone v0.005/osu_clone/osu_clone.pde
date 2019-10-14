@@ -1,5 +1,8 @@
 /*import processing.sound.*;
  SoundFile song;*/
+float rsplash = random(2);
+int splash = int(rsplash);
+String[] splashtext = {"better than ppy!", "Electric Boogaloo"};
 int start; //Not Sure What this is for
 boolean[] keys = {false, false}; //User Input Bool
 boolean die = false; //Loading thingy
@@ -29,6 +32,7 @@ void setup() {
    */  start = millis();
   bg = loadImage("bg.jpg");
     menubg = loadImage("menu.jpg");
+      surface.setTitle("osu!clone: " + splashtext[splash]);
 }
 void draw() {
 
