@@ -15,6 +15,7 @@ int[] circley = new int[2147483647]; // more circle positions
 int cs = 75; //circle size
 int clicked = 0;
 String[] pieces;
+PImage cursor ;
 boolean loli = false;
 PImage bg;
 boolean[] slider;
@@ -24,6 +25,8 @@ PImage menubg;
 void setup() {
   size(800, 600);
   background(128);
+    cursor = loadImage("osucursor.png");
+  cursor(cursor);
   surface.setTitle("osu!clone: " + splashtext[splash]);
   /*
   !!IMPORTANT DEV NOTE!!
