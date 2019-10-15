@@ -10,8 +10,8 @@ boolean die = false; //Loading thingy
 int index = 0; //loading thing
 PrintWriter output; // used in editor ~~ obsolete
 String[] lines; //loading thingy
-int[] circlex = new int[2147483647]; // circle positions
-int[] circley = new int[2147483647]; // more circle positions
+int[] circlex = new int[21474836]; // circle positions
+int[] circley = new int[21474836]; // more circle positions
 int cs = 75; //circle size
 int clicked = 0;
 String[] pieces;
@@ -21,6 +21,9 @@ boolean[] slider;
 String mapname = "";
 String mapplaying = "default.level";
 PImage menubg;
+int timer;
+int timer2;
+int hp = 20;
 void setup() {
   size(800, 600);
   background(128);
@@ -35,7 +38,9 @@ void setup() {
   menubg = loadImage("menu.jpg");
 }
 void draw() {
-
+println(timer);
+            timer = millis()-start - 4000;
+      timer2 = timer / 1000;
   if (loli == false) {
     background(menubg);
     textAlign(CENTER, CENTER);
@@ -101,25 +106,34 @@ void draw() {
       background(bg);
     }
     if (clicked == 0) {
+      if(timer < ((clicked*1000) + 700) * 2){
       ellipse(circlex[0], circley[0], cs, cs);
       fill(0);
       text(clicked+1, circlex[0]-10, circley[0]+10);
-      int timer = millis()-start - 4000;
-      int timer2 = timer / 1000;
+      }
       textSize(100);
-
+      
       if (timer2 >= 0) {
         if (mouseX > circlex[0] - cs && mouseX < circlex[0] + cs && mouseY > circley[0] - cs && mouseY < circley[0] + cs) {
           if (keys[0]==true) {
             clicked++;
+            hp++;
+          }else if(timer > ((clicked*1000) + 700) * 2){
+            hp-=1;
+            clicked++;
           }
-        }
+        }else if(timer > ((clicked*1000) + 700) * 2){
+            hp-=1;
+            clicked++;
+          }
       } else {
         text(timer2, 20, 100);
       }
     }
     if (clicked > 0) {
+
       try {
+        if(timer > (clicked *1000) + 700 && timer < ((clicked*1000) + 700) * 2){
         fill(255);
         ellipse(circlex[clicked], circley[clicked], cs, cs);
         fill(0);
@@ -127,8 +141,13 @@ void draw() {
         if (mouseX > circlex[clicked] - cs && mouseX < circlex[clicked] + cs && mouseY > circley[clicked] - cs && mouseY < circley[clicked] + cs) {
           if (keys[0]==true) {
             clicked++;
+            hp++;
           }
         }
+      } else if (timer > ((clicked*1000) + 700) * 2){
+          hp-=2;
+          clicked++;
+      }
       }
       catch (Exception e) {
         loli = false;
@@ -197,5 +216,6 @@ void keyReleased()
     clicked = 0;
     circle = 0;
     piece = 0;
+    hp = 20;
   }
 } 
