@@ -29,7 +29,7 @@ boolean loli2 = true;
 void setup() {
   size(800, 600);
   background(128);
-    cursor = loadImage("osucursor.png");
+  cursor = loadImage("osucursor.png");
   cursor(cursor);
   surface.setTitle("osu!clone: " + splashtext[splash]);
   /*
@@ -64,96 +64,108 @@ void draw() {
           loli = true;
         }
       }
-    }
-else {
+    } else {
       background(255);
       fill(0);
-      text("Failure. M to return to Menu",50,50,750,550);
-}
+      text("Failure. M to return to Menu", 50, 50, 750, 550);
+    }
   }
-    if (loli == true) {
-      textAlign(LEFT, BOTTOM);
-      try {
-        lines = loadStrings(mapplaying);
-        if (index < lines.length) {
-          pieces = split(lines[index], ',');
-          if (die == false) {
-            cs = 75;
-            try {
-              circlex[circle] = int(pieces[piece]);
-              piece++;
-              circley[circle] = int(pieces[piece]);
-              piece++;
-              circle++;
-            } 
-            catch(Exception e) {
-              die=true;
-            }
+  if (loli == true) {
+    textAlign(LEFT, BOTTOM);
+    try {
+      lines = loadStrings(mapplaying);
+      if (index < lines.length) {
+        pieces = split(lines[index], ',');
+        if (die == false) {
+          cs = 75;
+          try {
+            circlex[circle] = int(pieces[piece]);
+            piece++;
+            circley[circle] = int(pieces[piece]);
+            piece++;
+            circle++;
+          } 
+          catch(Exception e) {
+            die=true;
           }
         }
       }
-      catch (Exception e) {
-        println("Failed to load level: Check Game Directory and if filename entered correctly");
-        loli = false;
-        mapname = "";
-        die = false;
-        cs = 75; //circle size
-        clicked = 0;
-      }
-      try {
-        bg = loadImage(mapplaying+".jpg");
-      } 
-      catch(Exception e) {
-        bg = loadImage("bg.jpg");
-      }
+    }
+    catch (Exception e) {
+      println("Failed to load level: Check Game Directory and if filename entered correctly");
+      loli = false;
+      mapname = "";
+      die = false;
+      cs = 75; //circle size
+      clicked = 0;
+    }
+    try {
+      bg = loadImage(mapplaying+".jpg");
+    } 
+    catch(Exception e) {
+      bg = loadImage("bg.jpg");
+    }
 
-      fill(255);
-      textSize(25);
-      try {
-        background(bg);
-      } 
-      catch(Exception e) {
-        bg = loadImage("bg.jpg");
-        background(bg);
-      }
-      if (hp <= 0) {
-        loli = false;
-        loli2 = false;
-        mapname = "";
-        die = false;
-        cs = 75; //circle size
-        clicked = 0;
-        circle = 0;
-        piece = 0;
+    fill(255);
+    textSize(25);
+    try {
+      background(bg);
+    } 
+    catch(Exception e) {
+      bg = loadImage("bg.jpg");
+      background(bg);
+    }
+    if (hp <= 0) {
+      loli = false;
+      loli2 = false;
+      mapname = "";
+      die = false;
+      cs = 75; //circle size
+      clicked = 0;
+      circle = 0;
+      piece = 0;
+      hp = 20;
+    }
+    if (clicked == 0) {
+      if (timer < ((clicked*1000) + 700) * 2) {
         hp = 20;
+        ellipse(circlex[0], circley[0], cs, cs);
+        fill(0);
+        text(clicked+1, circlex[0]-10, circley[0]+10);
       }
-      if (clicked == 0) {
-        if (timer < ((clicked*1000) + 700) * 2) {
-          hp = 20;
-          ellipse(circlex[0], circley[0], cs, cs);
-          fill(0);
-          text(clicked+1, circlex[0]-10, circley[0]+10);
-        }
-        textSize(100);
+      textSize(100);
 
-        if (timer2 >= 0) {
-          if (mouseX > circlex[0] - cs && mouseX < circlex[0] + cs && mouseY > circley[0] - cs && mouseY < circley[0] + cs) {
-            if (keys[0]==true) {
-              clicked++;
-              hp++;
-            } else if (timer > ((clicked*1000) + 700) * 2) {
-              hp-=1;
-              clicked++;
-            }
+      if (timer2 >= 0) {
+        if (mouseX > circlex[0] - cs && mouseX < circlex[0] + cs && mouseY > circley[0] - cs && mouseY < circley[0] + cs) {
+          if (keys[0]==true) {
+            clicked++;
+            hp++;
           } else if (timer > ((clicked*1000) + 700) * 2) {
             hp-=1;
             clicked++;
           }
-        } else {
-          text(timer2, 20, 100);
+        } else if (timer > ((clicked*1000) + 700) * 2) {
+          hp-=1;
+          clicked++;
         }
+      } else {
+        text(timer2, 20, 100);
       }
-      if (clicked > 0) {
+    }
+    if (clicked > 0) {
+      if (circlex[clicked] >= 1000 && circley[clicked] >= 1000) {
+        /*  THIS DOES NOT CURRENTLY WORK
+         IT IS PLANNED THAT THIS WILL BE USED AS A PASS STATE FOR THE PlAYER
+         //Map Pass location
+         loli = false;
+         mapname = "";
+         die = false;
+         cs = 75; //circle size
+         clicked = 0;
+         circle = 0;
+         piece = 0;
+         println("pass");*/
+      } else {
 
         try {
           if (timer > (clicked *1000) + 700 && timer < ((clicked*1000) + 700) * 2) {
@@ -172,6 +184,7 @@ else {
             clicked++;
           }
         }
+
         catch (Exception e) {
           loli = false;
           mapname = "";
@@ -184,6 +197,7 @@ else {
       }
     }
   }
+}
 
 void keyPressed() {
   if (loli == true)
