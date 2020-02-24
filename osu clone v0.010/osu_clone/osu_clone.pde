@@ -3,13 +3,13 @@
 int circle = 0;
 int piece = 0;
 int splash = int(random(2));
-String[] splashtext = {"better than ppy!", "Electric Boogaloo"};
+String[] splashtext = {"better than ppy!", "Electric Boogaloo","click those circles","now with circles!"};
 int start; //Not Sure What this is for
-boolean[] keys = {false, false}; //User Input Bool
-boolean die = false; //Loading thingy
-int index = 0; //loading thing
-PrintWriter output; // used in editor ~~ obsolete
-String[] lines; //loading thingy
+boolean[] keys = {false, false}; // User CLicking Boolean
+boolean die = false; // Loading thingy
+int index = 0; // loading thing
+PrintWriter output; // used in editor and to reset default level
+String[] lines; // loading thingy
 int[] circlex = new int[21474836]; // circle positions
 int[] circley = new int[21474836]; // more circle positions
 int cs = 75; //circle size
@@ -34,7 +34,7 @@ void setup() {
   surface.setTitle("osu!clone: " + splashtext[splash]);
   /*
   !!IMPORTANT DEV NOTE!!
-   This line being uncommented resets the default level
+   The below line being uncommented resets the default level (maybe useful later on)
    */
   /*output = createWriter("default.level");
    output.print("300,200,444,222,200,300,600,400,599,100,291,429,200,200,200,488,488,292,725,13l,020,202,743,544,744,494,328,382,292,484");
@@ -68,7 +68,7 @@ void draw() {
 else {
       background(255);
       fill(0);
-      text("Failure. M to return to Menu",50,50,750,550);
+      text("Failure. Press M to return to Menu",50,50,750,550);
 }
   }
     if (loli == true) {
@@ -93,7 +93,7 @@ else {
         }
       }
       catch (Exception e) {
-        println("Failed to load level: Check Game Directory and if filename entered correctly");
+        println("Failed to load level: Check Game Directory and if the filename has been entered correctly");
         loli = false;
         mapname = "";
         die = false;
