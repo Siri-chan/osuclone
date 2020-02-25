@@ -19,8 +19,9 @@ current selected map displayed at bottom of menu
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 EDITOR:
-Editor is available separately to the game
+Press P while on the menu to open the editor.
 To use the editor, first type a file name, then press the 2 key.
 Once that is done, you can enter note positions by clicking, and clear everything by right-clicking.
 Once 11 notes have been placed, press 1 to confirm
+The map will be saved to your processing directory (or maybe the .exe directory on release)
 then place the map into the game and play.
