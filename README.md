@@ -1,9 +1,9 @@
 # osu!clone
 (not osu!clove)
 ## controls
-Z/X - Click
-Down Arrow - ScreenShot
-Q - Quit Game
+Z/X - Click /
+Down Arrow - ScreenShot /
+Q - Quit Game /
 M - Return to Menu
 ## Map Selection
 type map file name (case-sensitive)
