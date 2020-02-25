@@ -1,19 +1,15 @@
 # osu!clone
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+(not osu!clove)
 ## controls
-
 Z/X - Click
 Down Arrow - ScreenShot
 Q - Quit Game
 M - Return to Menu
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ## Map Selection
 type map file name (case-sensitive)
 if mistake made, press 0
 press 5 to confirm
 current selected map displayed at bottom of menu
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ## EDITOR:
 Press P while on the menu to open the editor.
 To use the editor, first type a file name, then press the 2 key.
