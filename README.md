@@ -1,3 +1,23 @@
-# osuclone
-This is a great game based on the game osu!.  It was forged in the mines of men and created by two man.
-WARNING! This game is not osu clove!
+# osu!clone
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## controls
+
+Z/X - Click
+Down Arrow - ScreenShot
+Q - Quit Game
+M - Return to Menu
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## Map Selection
+type map file name (case-sensitive)
+if mistake made, press 0
+press 5 to confirm
+current selected map displayed at bottom of menu
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## EDITOR:
+Press P while on the menu to open the editor.
+To use the editor, first type a file name, then press the 2 key.
+Once that is done, you can enter note positions by clicking, and clear everything by right-clicking.
+Once 11 notes have been placed, press 1 to confirm
+The map will be saved to your processing directory (or maybe the .exe directory on release)
+then place the map into the game and play.
