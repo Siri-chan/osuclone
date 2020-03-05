@@ -24,12 +24,12 @@ String mapplaying = "default.level";
 PImage menubg;
 int timer;
 int timer2;
-int hp = 10;
+int hp = 20;
 boolean loli2 = true;
 void setup() {
   size(800, 600);
   background(128);
-    cursor = loadImage("osucursor.png");
+  cursor = loadImage("osucursor.png");
   cursor(cursor);
   surface.setTitle("osu!clone: " + splashtext[splash]);
   /*
@@ -42,7 +42,6 @@ void setup() {
   menubg = loadImage("menu.jpg");
 }
 void draw() {
-  println(hp);
   timer = millis()-start - 4000;
   timer2 = timer / 1000;
   if (loli == false) {
@@ -64,126 +63,127 @@ void draw() {
           loli = true;
         }
       }
-    }
-else {
+    } else {
       background(255);
       fill(0);
-      text("Failure. M to return to Menu",50,50,750,550);
-}
+      text("Failure. M to return to Menu", 50, 50, 750, 550);
+    }
   }
-    if (loli == true) {
-      textAlign(LEFT, BOTTOM);
-      try {
-        lines = loadStrings(mapplaying);
-        if (index < lines.length) {
-          pieces = split(lines[index], ',');
-          if (die == false) {
-            cs = 75;
-            try {
-              circlex[circle] = int(pieces[piece]);
-              piece++;
-              circley[circle] = int(pieces[piece]);
-              piece++;
-              circle++;
-            } 
-            catch(Exception e) {
-              die=true;
-            }
+  if (loli == true) {
+    textAlign(LEFT, BOTTOM);
+    try {
+      lines = loadStrings(mapplaying);
+      if (index < lines.length) {
+        pieces = split(lines[index], ',');
+        if (die == false) {
+          cs = 75;
+          try {
+            circlex[circle] = int(pieces[piece]);
+            piece++;
+            circley[circle] = int(pieces[piece]);
+            piece++;
+            circle++;
+          } 
+          catch(Exception e) {
+            die=true;
           }
         }
       }
-      catch (Exception e) {
-        println("Failed to load level: Check Game Directory and if filename entered correctly");
-        loli = false;
-        mapname = "";
-        die = false;
-        cs = 75; //circle size
-        clicked = 0;
-      }
-      try {
-        bg = loadImage(mapplaying+".jpg");
-      } 
-      catch(Exception e) {
-        bg = loadImage("bg.jpg");
-      }
+    }
+    catch (Exception e) {
+      println("Failed to load level: Check Game Directory and if filename entered correctly");
+      loli = false;
+      mapname = "";
+      die = false;
+      cs = 75; //circle size
+      clicked = 0;
+    }
+    try {
+      bg = loadImage(mapplaying+".jpg");
+    } 
+    catch(Exception e) {
+      bg = loadImage("bg.jpg");
+    }
 
-      fill(255);
-      textSize(25);
-      try {
-        background(bg);
-      } 
-      catch(Exception e) {
-        bg = loadImage("bg.jpg");
-        background(bg);
+    fill(255);
+    textSize(25);
+    try {
+      background(bg);
+    } 
+    catch(Exception e) {
+      bg = loadImage("bg.jpg");
+      background(bg);
+    }
+    if (hp <= 0) {
+      loli = false;
+      loli2 = false;
+      mapname = "";
+      die = false;
+      cs = 75; //circle size
+      clicked = 0;
+      circle = 0;
+      piece = 0;
+      hp = 20;
+    }
+    if (clicked == 0) {
+      if (timer < ((clicked*1000) + 700) * 2) {
+        hp = 20;
+        ellipse(circlex[0], circley[0], cs, cs);
+        fill(0);
+        text(clicked+1, circlex[0]-10, circley[0]+10);
       }
-      if (hp <= 0) {
+      textSize(100);
+
+      if (timer2 >= 0) {
+        if (mouseX > circlex[0] - cs && mouseX < circlex[0] + cs && mouseY > circley[0] - cs && mouseY < circley[0] + cs) {
+          if (keys[0]==true) {
+            clicked++;
+            hp++;
+          } else if (timer > ((clicked*1000) + 700) * 2) {
+            hp-=1;
+            clicked++;
+          }
+        } else if (timer > ((clicked*1000) + 700) * 2) {
+          hp-=1;
+          clicked++;
+        }
+      } else {
+        text(timer2, 20, 100);
+      }
+    }
+    if (clicked > 0) {
+      fill(255);
+      text("hp:" + hp, 700, 50);
+      fill(0);
+      try {
+        if (timer > (clicked *1000) + 700 && timer < ((clicked*1000) + 700) * 2) {
+          fill(255);
+          ellipse(circlex[clicked], circley[clicked], cs, cs);
+          fill(0);
+          text(clicked+1, circlex[clicked]-10, circley[clicked]+10);
+          if (mouseX > circlex[clicked] - cs && mouseX < circlex[clicked] + cs && mouseY > circley[clicked] - cs && mouseY < circley[clicked] + cs) {
+            if (keys[0]==true) {
+              clicked++;
+              hp++;
+            }
+          }
+        } else if (timer > ((clicked*1000) + 700) * 2) {
+          hp-=2;
+          clicked++;
+        }
+      }
+      catch (Exception e) {
         loli = false;
-        loli2 = false;
         mapname = "";
         die = false;
         cs = 75; //circle size
         clicked = 0;
         circle = 0;
         piece = 0;
-        hp = 20;
-      }
-      if (clicked == 0) {
-        if (timer < ((clicked*1000) + 700) * 2) {
-          hp = 20;
-          ellipse(circlex[0], circley[0], cs, cs);
-          fill(0);
-          text(clicked+1, circlex[0]-10, circley[0]+10);
-        }
-        textSize(100);
-
-        if (timer2 >= 0) {
-          if (mouseX > circlex[0] - cs && mouseX < circlex[0] + cs && mouseY > circley[0] - cs && mouseY < circley[0] + cs) {
-            if (keys[0]==true) {
-              clicked++;
-              hp++;
-            } else if (timer > ((clicked*1000) + 700) * 2) {
-              hp-=1;
-              clicked++;
-            }
-          } else if (timer > ((clicked*1000) + 700) * 2) {
-            hp-=1;
-            clicked++;
-          }
-        } else {
-          text(timer2, 20, 100);
-        }
-      }
-      if (clicked > 0) {
-
-        try {
-          if (timer > (clicked *1000) + 700 && timer < ((clicked*1000) + 700) * 2) {
-            fill(255);
-            ellipse(circlex[clicked], circley[clicked], cs, cs);
-            fill(0);
-            text(clicked+1, circlex[clicked]-10, circley[clicked]+10);
-            if (mouseX > circlex[clicked] - cs && mouseX < circlex[clicked] + cs && mouseY > circley[clicked] - cs && mouseY < circley[clicked] + cs) {
-              if (keys[0]==true) {
-                clicked++;
-                hp++;
-              }
-            }
-          } else if (timer > ((clicked*1000) + 700) * 2) {
-            hp-=2;
-            clicked++;
-          }
-        }
-        catch (Exception e) {
-          loli = false;
-          mapname = "";
-          die = false;
-          cs = 75; //circle size
-          clicked = 0;
-          circle = 0;
-          piece = 0;
-        }
       }
     }
   }
+}
 
 void keyPressed() {
   if (loli == true)
@@ -242,80 +242,81 @@ void keyReleased()
     piece = 0;
     hp = 20;
     loli2 = true;
-  } if(key=='p'){
-  OtherSketch otherSketch = new OtherSketch();
-  runSketch(new String[]{"OtherSketch"}, otherSketch);
+  } 
+  if (key=='p') {
+    OtherSketch otherSketch = new OtherSketch();
+    runSketch(new String[]{"OtherSketch"}, otherSketch);
   }
 } 
 class OtherSketch extends PApplet {
-// Variable to store text currently being typed
-String typing = "";
+  // Variable to store text currently being typed
+  String typing = "";
 
-// Variable to store saved text when return is hit
-String saved = "";
+  // Variable to store saved text when return is hit
+  String saved = "";
 
-PrintWriter output;
-boolean lol = false;
-int circle = 1;
-void setup() {
-  background(200);
-  surface.setResizable(true);
-  noStroke();
-  fill(255);
-}
+  PrintWriter output;
+  boolean lol = false;
+  int circle = 1;
+  void setup() {
+    background(200);
+    surface.setResizable(true);
+    noStroke();
+    fill(255);
+  }
 
-void draw() {  
-  // Set the font and fill for text
-  noFill();
-  stroke(0);
-  strokeWeight(5);
-  rect(0,0,800,600);
-  noStroke();
-  fill(0);
-  textSize(25);
-  // Display everything
-  text("Click in this window and type. \nHit '2' to save. ", 25, 40);
-  text("Input: " + typing,25,190);
-  text("Saved text: " + saved,25,230);
-  text("Once you are done, press '1' to exit and save the notes",25,270);
-  //this will save to your processing directory
-}
-void mouseClicked() {
-  if (lol==true) {
-    redraw();
-    if (mouseX <= 800-75 && mouseY <= 600-75) {
-      stroke(0);
-      fill(255);
-      output.print(mouseX+","+mouseY+",");
-      ellipse(mouseX, mouseY, 75, 75);
-      fill(0);
-      stroke(0);
-      text(circle, mouseX-10, mouseY+10);
-      circle++;
+  void draw() {  
+    // Set the font and fill for text
+    noFill();
+    stroke(0);
+    strokeWeight(5);
+    rect(0, 0, 800, 600);
+    noStroke();
+    fill(0);
+    textSize(25);
+    // Display everything
+    text("Click in this window and type. \nHit '2' to save. ", 25, 40);
+    text("Input: " + typing, 25, 190);
+    text("Saved text: " + saved, 25, 230);
+    text("Once you are done, press '1' to exit and save the notes", 25, 270);
+    //this will save to your processing directory
+  }
+  void mouseClicked() {
+    if (lol==true) {
+      redraw();
+      if (mouseX <= 800-75 && mouseY <= 600-75) {
+        stroke(0);
+        fill(255);
+        output.print(mouseX+","+mouseY+",");
+        ellipse(mouseX, mouseY, 75, 75);
+        fill(0);
+        stroke(0);
+        text(circle, mouseX-10, mouseY+10);
+        circle++;
+      }
     }
   }
-}
-void keyPressed() {
-  // If the return key is pressed, save the String and clear it
-  if (key == '2' ) {
-    saved = typing;
-    output = createWriter(saved+".level");
-    lol = true;
-    // A String can be cleared by setting it equal to ""
-    typing = ""; 
-  } else if (key == '1'){
-    output.flush();
-    output.close();
-    exit();
-  }  else if ( key == BACKSPACE) {
-    if (typing.length() > 0) {
-      background(200);
-      typing = typing.substring(0, max(0, typing.length() - 1));
+  void keyPressed() {
+    // If the return key is pressed, save the String and clear it
+    if (key == '2' ) {
+      saved = typing;
+      output = createWriter(saved+".level");
+      lol = true;
+      // A String can be cleared by setting it equal to ""
+      typing = "";
+    } else if (key == '1') {
+      output.flush();
+      output.close();
+      exit();
+    } else if ( key == BACKSPACE) {
+      if (typing.length() > 0) {
+        background(200);
+        typing = typing.substring(0, max(0, typing.length() - 1));
+      }
+    } else {
+      // Otherwise, concatenate the String
+      // Each character typed by the user is added to the end of the String variable.
+      typing = typing + key;
     }
-  } else {
-    // Otherwise, concatenate the String
-    // Each character typed by the user is added to the end of the String variable.
-    typing = typing + key;
   }
-}
 } 
