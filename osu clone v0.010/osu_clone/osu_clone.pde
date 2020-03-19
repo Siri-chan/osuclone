@@ -24,9 +24,10 @@ String mapplaying = "default.level";
 PImage menubg;
 int timer;
 int timer2;
-int hp = 20;
+int hp = 10;
 boolean loli2 = true;
 void setup() {
+  //song = new SoundFile(this, "Grey Beard Halt.mp3");
   size(800, 600);
   background(128);
   cursor = loadImage("osucursor.png");
@@ -50,7 +51,11 @@ void draw() {
       textAlign(CENTER, CENTER);
       fill(255);
       textSize(50);
-      text(mapname, 400, 500);
+      try {
+        text(mapname, 400, 500);
+      }
+      catch(Exception e) {
+      }
       text(mapplaying, 400, 550);
       fill(255, 192, 203);
       textSize(100);
@@ -76,6 +81,7 @@ void draw() {
       if (index < lines.length) {
         pieces = split(lines[index], ',');
         if (die == false) {
+          //song.play();
           cs = 75;
           try {
             circlex[circle] = int(pieces[piece]);
@@ -123,11 +129,11 @@ void draw() {
       clicked = 0;
       circle = 0;
       piece = 0;
-      hp = 20;
+      hp = 10;
     }
     if (clicked == 0) {
       if (timer < ((clicked*1000) + 700) * 2) {
-        hp = 20;
+        hp = 10;
         ellipse(circlex[0], circley[0], cs, cs);
         fill(0);
         text(clicked+1, circlex[0]-10, circley[0]+10);
@@ -138,13 +144,15 @@ void draw() {
         if (mouseX > circlex[0] - cs && mouseX < circlex[0] + cs && mouseY > circley[0] - cs && mouseY < circley[0] + cs) {
           if (keys[0]==true) {
             clicked++;
-            hp++;
+            if (hp < 15) {
+              hp++;
+            }
           } else if (timer > ((clicked*1000) + 700) * 2) {
-            hp-=1;
+            hp-=2;
             clicked++;
           }
         } else if (timer > ((clicked*1000) + 700) * 2) {
-          hp-=1;
+          hp-=2;
           clicked++;
         }
       } else {
@@ -164,7 +172,9 @@ void draw() {
           if (mouseX > circlex[clicked] - cs && mouseX < circlex[clicked] + cs && mouseY > circley[clicked] - cs && mouseY < circley[clicked] + cs) {
             if (keys[0]==true) {
               clicked++;
-              hp++;
+              if (hp < 15) {
+                hp++;
+              }
             }
           }
         } else if (timer > ((clicked*1000) + 700) * 2) {
@@ -216,38 +226,43 @@ void keyPressed() {
   }
 }
 void keyReleased()
-{
-  if (key == 'z' || key == 'Z') {
-    keys[0] = false;
+{ 
+  if (loli==true)
+  {
+    if (key == 'z' || key == 'Z') {
+      keys[0] = false;
+    }
+    if (key == 'x' || key == 'X') {
+      keys[0] = false;
+    }
+
+    if (key=='q' || key == 'Q') {
+      exit();
+    }
+ 
+    if (key=='p') {
+      OtherSketch otherSketch = new OtherSketch();
+      runSketch(new String[]{"OtherSketch"}, otherSketch);
+    }
   }
-  if (key == 'x' || key == 'X') {
-    keys[0] = false;
-  }
+      if (key == 'm' || key == 'M') {
+      loli = false;
+      mapname = "";
+      die = false;
+      cs = 75; //circle size
+      clicked = 0;
+      circle = 0;
+      piece = 0;
+      hp = 10;
+      loli2 = true;
+    }
   if (keyCode == DOWN) {
     if (keys[1]==true) {
       saveFrame("screenshot-"+millis()+"-###.jpg");
     }
     keys[1]=false;
   }
-  if (key=='q' || key == 'Q') {
-    exit();
-  }
-  if (key == 'm' || key == 'M') {
-    loli = false;
-    mapname = "";
-    die = false;
-    cs = 75; //circle size
-    clicked = 0;
-    circle = 0;
-    piece = 0;
-    hp = 20;
-    loli2 = true;
-  } 
-  if (key=='p') {
-    OtherSketch otherSketch = new OtherSketch();
-    runSketch(new String[]{"OtherSketch"}, otherSketch);
-  }
-} 
+}
 class OtherSketch extends PApplet {
   // Variable to store text currently being typed
   String typing = "";
