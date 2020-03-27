@@ -26,6 +26,8 @@ int timer;
 int timer2;
 int hp = 10;
 boolean loli2 = true;
+int ar = 500;
+int ar2 = 1000;
 void setup() {
   //song = new SoundFile(this, "Grey Beard Halt.mp3");
   size(800, 600);
@@ -81,17 +83,26 @@ void draw() {
       if (index < lines.length) {
         pieces = split(lines[index], ',');
         if (die == false) {
-          //song.play();
-          cs = 75;
-          try {
-            circlex[circle] = int(pieces[piece]);
+          if (piece==0) {
+            ar = int(pieces[piece]);
+            //song.play();
+            cs = 75;
             piece++;
-            circley[circle] = int(pieces[piece]);
+          } else if ( piece==1){
+            ar2 = int(pieces[piece]);
             piece++;
-            circle++;
-          } 
-          catch(Exception e) {
-            die=true;
+          }
+          else {
+            try {
+              circlex[circle] = int(pieces[piece]);
+              piece++;
+              circley[circle] = int(pieces[piece]);
+              piece++;
+              circle++;
+            } 
+            catch(Exception e) {
+              die=true;
+            }
           }
         }
       }
@@ -132,7 +143,7 @@ void draw() {
       hp = 10;
     }
     if (clicked == 0) {
-      if (timer < ((clicked*1000) + 700) * 2) {
+      if (timer < (clicked*ar)) {
         hp = 10;
         ellipse(circlex[0], circley[0], cs, cs);
         fill(0);
@@ -147,11 +158,11 @@ void draw() {
             if (hp < 15) {
               hp++;
             }
-          } else if (timer > ((clicked*1000) + 700) * 2) {
+          } else if (timer > (clicked * ar)) {
             hp-=2;
             clicked++;
           }
-        } else if (timer > ((clicked*1000) + 700) * 2) {
+        } else if (timer > clicked * ar) {
           hp-=2;
           clicked++;
         }
@@ -164,7 +175,7 @@ void draw() {
       text("hp:" + hp, 700, 50);
       fill(0);
       try {
-        if (timer > (clicked *1000) + 700 && timer < ((clicked*1000) + 700) * 2) {
+        if (timer > clicked * ar && timer < clicked*ar + ar2) {
           fill(255);
           ellipse(circlex[clicked], circley[clicked], cs, cs);
           fill(0);
@@ -177,7 +188,7 @@ void draw() {
               }
             }
           }
-        } else if (timer > ((clicked*1000) + 700) * 2) {
+        } else if (timer > (clicked *ar) + ar2) {
           hp-=2;
           clicked++;
         }
@@ -239,23 +250,23 @@ void keyReleased()
     if (key=='q' || key == 'Q') {
       exit();
     }
- 
+
     if (key=='p') {
       OtherSketch otherSketch = new OtherSketch();
       runSketch(new String[]{"OtherSketch"}, otherSketch);
     }
   }
-      if (key == 'm' || key == 'M') {
-      loli = false;
-      mapname = "";
-      die = false;
-      cs = 75; //circle size
-      clicked = 0;
-      circle = 0;
-      piece = 0;
-      hp = 10;
-      loli2 = true;
-    }
+  if (key == 'm' || key == 'M') {
+    loli = false;
+    mapname = "";
+    die = false;
+    cs = 75; //circle size
+    clicked = 0;
+    circle = 0;
+    piece = 0;
+    hp = 10;
+    loli2 = true;
+  }
   if (keyCode == DOWN) {
     if (keys[1]==true) {
       saveFrame("screenshot-"+millis()+"-###.jpg");
