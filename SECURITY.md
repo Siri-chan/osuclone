@@ -12,7 +12,7 @@ However, a flaw may be on Processing's Part.
 ## Reporting a Vulnerability
 
 ### For *My* Mistakes
-To report a flaw on osu!clone's part, use the *issues* section of **_siri-chan/osu-clone/master_**
+To report a flaw on osu!clone's part, use the *issues* section of **_/siri-chan/osu-clone/master_**
 
 ### For *Processing Foundation*'s Mistakes
-To report a flaw in Processing's engine, 
+To report a flaw in Processing's engine, use **_/processing/processing/issues_**
