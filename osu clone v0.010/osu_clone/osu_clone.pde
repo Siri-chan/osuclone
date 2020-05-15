@@ -1,31 +1,31 @@
 /*import processing.sound.*;
  SoundFile song;*/
-int circle = 0;
-int piece = 0;
-int splash = int(random(2));
-String[] splashtext = {"better than ppy!", "Electric Boogaloo"};
-int start; //Not Sure What this is for
-boolean[] keys = {false, false}; //User Input Bool
-boolean die = false; //Loading thingy
-int index = 0; //loading thing
-PrintWriter output; // used in editor ~~ obsolete
-String[] lines; //loading thingy
-int[] circlex = new int[21474836]; // circle positions
-int[] circley = new int[21474836]; // more circle positions
-int cs = 75; //circle size
-int clicked = 0;
-String[] pieces;
-PImage cursor ;
-boolean loli = false;
-PImage bg;
-boolean[] slider;
-String mapname = "";
-String mapplaying = "default.level";
-PImage menubg;
-int timer;
-int timer2;
-int hp = 10;
-boolean loli2 = true;
+int circle = 0; //a counter for level generation.
+int piece = 0; //a counter for level reading
+int splash = int(random(6)); //a random generator for the splash text used for the window title
+String[] splashtext = {"better than ppy!", "Electric Boogaloo","North Korea's Finest!","please play the normal osu! please please please","Buggiest Game of 2019!", "Buggiest Game of 2020!"}; //a list of the splash text options
+int start; //used a couple of times in our broken timing system
+boolean[] keys = {false, false}; //bool used when user is inputting
+boolean die = false; //used to stop the game from load-looping
+int index = 0; //used to split levels into individual coords
+PrintWriter output; //used to write things to a file - only currently used in our default.level reset switch
+String[] lines; //the string with all of the .level file (un-split)
+int[] circlex = new int[21474836]; // the x coords for every possible circle
+int[] circley = new int[21474836]; // the y coords for every possible circle
+int cs = 75; //circle size variable
+int clicked = 0; //counts level progress
+String[] pieces; //the array that our level's coords go into before becoming ints
+PImage cursor; //the image used as our horrible cursor
+boolean loli = false; //menu open/closed
+PImage bg; //map backgrounds
+// boolean[] slider; currently unused (although you can probably guess what it's for)
+String mapname = ""; //the string used in the menu asset where it has a live typing feed of the user's map selection
+String mapplaying = "default.level"; //string storing the map that is currently being played
+PImage menubg; //menu background
+int timer; //used in note timing
+int timer2; //also used in note timing
+int hp = 10; //hp value (you can probably guess what this does)
+boolean loli2 = true; //used to track failure
 void setup() {
   //song = new SoundFile(this, "Grey Beard Halt.mp3");
   size(800, 600);
@@ -33,10 +33,8 @@ void setup() {
   cursor = loadImage("osucursor.png");
   cursor(cursor);
   surface.setTitle("osu!clone: " + splashtext[splash]);
-  /*
-  !!IMPORTANT DEV NOTE!!
-   This line being uncommented resets the default level
-   */
+/* !!IMPORTANT DEV NOTE!!
+   The following line being uncommented resets the default level */
   /*output = createWriter("default.level");
    output.print("300,200,444,222,200,300,600,400,599,100,291,429,200,200,200,488,488,292,725,13l,020,202,743,544,744,494,328,382,292,484,1000,1000");
    */  start = millis();
@@ -101,7 +99,7 @@ void draw() {
       loli = false;
       mapname = "";
       die = false;
-      cs = 75; //circle size
+      cs = 75;
       clicked = 0;
     }
     try {
@@ -125,7 +123,7 @@ void draw() {
       loli2 = false;
       mapname = "";
       die = false;
-      cs = 75; //circle size
+      cs = 75;
       clicked = 0;
       circle = 0;
       piece = 0;
@@ -186,7 +184,7 @@ void draw() {
         loli = false;
         mapname = "";
         die = false;
-        cs = 75; //circle size
+        cs = 75;
         clicked = 0;
         circle = 0;
         piece = 0;
@@ -239,23 +237,23 @@ void keyReleased()
     if (key=='q' || key == 'Q') {
       exit();
     }
- 
-    if (key=='p') {
+
+    if (key=='p' || key == 'P') {
       OtherSketch otherSketch = new OtherSketch();
       runSketch(new String[]{"OtherSketch"}, otherSketch);
     }
   }
-      if (key == 'm' || key == 'M') {
-      loli = false;
-      mapname = "";
-      die = false;
-      cs = 75; //circle size
-      clicked = 0;
-      circle = 0;
-      piece = 0;
-      hp = 10;
-      loli2 = true;
-    }
+  if (key == 'm' || key == 'M') {
+    loli = false;
+    mapname = "";
+    die = false;
+    cs = 75; //circle size
+    clicked = 0;
+    circle = 0;
+    piece = 0;
+    hp = 10;
+    loli2 = true;
+  }
   if (keyCode == DOWN) {
     if (keys[1]==true) {
       saveFrame("screenshot-"+millis()+"-###.jpg");
@@ -264,12 +262,8 @@ void keyReleased()
   }
 }
 class OtherSketch extends PApplet {
-  // Variable to store text currently being typed
   String typing = "";
-
-  // Variable to store saved text when return is hit
   String saved = "";
-
   PrintWriter output;
   boolean lol = false;
   int circle = 1;
@@ -279,9 +273,7 @@ class OtherSketch extends PApplet {
     noStroke();
     fill(255);
   }
-
   void draw() {  
-    // Set the font and fill for text
     noFill();
     stroke(0);
     strokeWeight(5);
@@ -289,7 +281,6 @@ class OtherSketch extends PApplet {
     noStroke();
     fill(0);
     textSize(25);
-    // Display everything
     text("Click in this window and type. \nHit '2' to save. ", 25, 40);
     text("Input: " + typing, 25, 190);
     text("Saved text: " + saved, 25, 230);
@@ -312,12 +303,10 @@ class OtherSketch extends PApplet {
     }
   }
   void keyPressed() {
-    // If the return key is pressed, save the String and clear it
     if (key == '2' ) {
       saved = typing;
       output = createWriter(saved+".level");
       lol = true;
-      // A String can be cleared by setting it equal to ""
       typing = "";
     } else if (key == '1') {
       output.flush();
@@ -329,8 +318,6 @@ class OtherSketch extends PApplet {
         typing = typing.substring(0, max(0, typing.length() - 1));
       }
     } else {
-      // Otherwise, concatenate the String
-      // Each character typed by the user is added to the end of the String variable.
       typing = typing + key;
     }
   }
