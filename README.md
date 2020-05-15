@@ -22,4 +22,4 @@ The map will be saved to your processing directory (or the .exe directory on the
 then place the map into the game directory and play.
 ### External
 If you are using Processing, you can use the External Version (under osu_clone_editor.pde). This is often at a different release state to the In-Game version, sometimes ahead, sometimes behind. I will try to keep them caught up.
-The External Version is non-scalable.
+The External Version has a non-scalable window.
