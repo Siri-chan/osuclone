@@ -34,7 +34,7 @@ void setup() {
   cursor(cursor);
   surface.setTitle("osu!clone: " + splashtext[splash]);
 /* !!IMPORTANT DEV NOTE!!
-   The following line being uncommented resets the default level */
+   The following lines being uncommented resets the default level */
   /*output = createWriter("default.level");
    output.print("300,200,444,222,200,300,600,400,599,100,291,429,200,200,200,488,488,292,725,13l,020,202,743,544,744,494,328,382,292,484,1000,1000");
    */  start = millis();
