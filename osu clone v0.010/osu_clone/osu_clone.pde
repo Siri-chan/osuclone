@@ -3,7 +3,7 @@
 int circle = 0; //a counter for level generation.
 int piece = 0; //a counter for level reading
 int splash = int(random(6)); //a random generator for the splash text used for the window title
-String[] splashtext = {"better than ppy!", "Electric Boogaloo","North Korea's Finest!","please play the normal osu! please please please","Buggiest Game of 2019!", "Buggiest Game of 2020!"}; //a list of the splash text options
+String[] splashtext = {"better than ppy!", "Electric Boogaloo", "North Korea's Finest!", "please play the normal osu! please please please", "Buggiest Game of 2019!", "Buggiest Game of 2020!"}; //a list of the splash text options
 int start; //used a couple of times in our broken timing system
 boolean[] keys = {false, false}; //bool used when user is inputting
 boolean die = false; //used to stop the game from load-looping
@@ -33,7 +33,7 @@ void setup() {
   cursor = loadImage("osucursor.png");
   cursor(cursor);
   surface.setTitle("osu!clone: " + splashtext[splash]);
-/* !!IMPORTANT DEV NOTE!!
+  /* !!IMPORTANT DEV NOTE!!
    The following lines being uncommented resets the default level */
   /*output = createWriter("default.level");
    output.print("300,200,444,222,200,300,600,400,599,100,291,429,200,200,200,488,488,292,725,13l,020,202,743,544,744,494,328,382,292,484,1000,1000");
@@ -154,7 +154,7 @@ void draw() {
           clicked++;
         }
       } else {
-        text(timer2, 20, 100);
+        text(timer2 *-1, 20, 100);
       }
     }
     if (clicked > 0) {
